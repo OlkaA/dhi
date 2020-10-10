@@ -5,7 +5,7 @@ import {
   Route,
   Link
 } from 'react-router-dom';
-import Map from './pages/Map';
+import MapPage from './pages/MapPage';
 import Time from './pages/Time';
 import About from './pages/About';
 import Home from './pages/Home';
@@ -33,7 +33,7 @@ export default function App() {
         </nav>
         <Switch>
           <Route path="/map">
-            <Map />
+            <MapPage />
           </Route>
           <Route path="/time">
             <Time />
