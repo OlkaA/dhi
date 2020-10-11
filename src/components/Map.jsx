@@ -65,8 +65,6 @@ function Map(props) {
     pitch: 0,
   });
 
-  console.log(cykelInfrastruktur, props.selectedPlace);
-
   return (
     <MapGL
       ref={map}

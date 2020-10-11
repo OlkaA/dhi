@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Map from "../components/Map";
 import Graph from "../components/Graph";
-import '../styles/infoPage.css';
+import "../styles/infoPage.css";
 
 function MapPage() {
   const [selectedPlace, setSelectedPlace] = useState({
@@ -10,18 +10,19 @@ function MapPage() {
   });
 
   return (
-    <div className='flex'>
-      <section>
-        <h1>Map</h1>
-        <Map
-          getSelectedPlace={(value) => setSelectedPlace(value)}
-          selectedPlace={selectedPlace}
-        />
-      </section>
-      <section>
-        <h1>Graph</h1>
-        <Graph data={selectedPlace} />
-      </section>
+    <div>
+      <h1>
+        Click on green info sign and the information about the problem on bike
+        path appears alongside with the temperature in this area in the near
+        future
+      </h1>
+      <div className="flex">
+          <Map
+            getSelectedPlace={(value) => setSelectedPlace(value)}
+            selectedPlace={selectedPlace}
+          />
+          <Graph data={selectedPlace} />
+      </div>
     </div>
   );
 }
