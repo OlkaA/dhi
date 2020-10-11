@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Map from "../components/Map";
 import Graph from "../components/Graph";
-import './mappage.css';
+import '../styles/infoPage.css';
 
 function MapPage() {
   const [selectedPlace, setSelectedPlace] = useState({
