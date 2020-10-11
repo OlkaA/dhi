@@ -1,18 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
-import MapGL, { Marker, Layer, Feature } from "react-map-gl";
-import {fetchCykelData, fetchCykelInfrastrukturData} from '../data';
+import MapGL, { Marker, Popup, Feature } from "react-map-gl";
+import { fetchCykelData, fetchCykelInfrastrukturData } from "../data";
+import "../styles/map.css";
+
 const mapboxApiAccessToken = process.env.REACT_APP_MAP_BOX_API_ACCESS_TOKEN;
 
 function Map(props) {
   const [cykelData, setCykelData] = useState([]);
   const [cykelInfrastruktur, setCykelInfrastrukturData] = useState([]);
-  // const [selectedPlace, setSelectedPlace] = useState(null)
   const map = useRef();
 
   useEffect(() => {
     const marRef = map.current.getMap();
 
-    fetchCykelData().then( json => {
+    fetchCykelData().then((json) => {
       setCykelData(json);
 
       marRef.on("load", function () {
@@ -46,10 +47,9 @@ function Map(props) {
       });
     });
 
-    fetchCykelInfrastrukturData().then( json => {
+    fetchCykelInfrastrukturData().then((json) => {
       setCykelInfrastrukturData(json);
-    })
-    
+    });
   }, []);
 
   const [viewport, setViewport] = useState({
@@ -59,6 +59,8 @@ function Map(props) {
     bearing: 0,
     pitch: 0,
   });
+
+  console.log(cykelInfrastruktur, props.selectedPlace);
 
   return (
     <MapGL
@@ -70,18 +72,36 @@ function Map(props) {
       onViewportChange={(nextViewport) => setViewport(nextViewport)}
       mapboxApiAccessToken={mapboxApiAccessToken}
     >
-      {cykelInfrastruktur.map(item => (
-        <Marker key={item.id} longitude={item.geometry.coordinates[0][0]} latitude={item.geometry.coordinates[0][1]}>
-          <button onClick={(e) => {
-              e.preventDefault();
-              const selectedPlace = {
-                lat: item.geometry.coordinates[0][1],
-                lon: item.geometry.coordinates[0][0],
-              }
-              props.getSelectedPlace(selectedPlace)
-            }
-          }>I</button>
-        </Marker>
+      {cykelInfrastruktur.map((item) => (
+        <div key={item.id}>
+          <Marker
+            longitude={item.geometry.coordinates[0][0]}
+            latitude={item.geometry.coordinates[0][1]}
+          >
+            <button
+              className="marker"
+              onClick={(e) => {
+                e.preventDefault();
+                const selectedPlace = {
+                  lat: item.geometry.coordinates[0][1],
+                  lon: item.geometry.coordinates[0][0],
+                };
+                props.getSelectedPlace(selectedPlace);
+              }}
+            >
+              <i>i</i>
+            </button>
+          </Marker>
+          {item.geometry.coordinates[0][0] === props.selectedPlace.lon &&
+            item.geometry.coordinates[0][1] === props.selectedPlace.lat && (
+              <Popup
+                longitude={props.selectedPlace.lon}
+                latitude={props.selectedPlace.lat}
+              >
+                {item.properties.beskrivelse}
+              </Popup>
+            )}
+        </div>
       ))}
     </MapGL>
   );

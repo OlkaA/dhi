@@ -1,0 +1,8 @@
+button.marker {
+    background-color: #65b565;
+    color: white;
+    border-radius: 6px;
+    border-color: #577b8a;
+    border-width: 1px;
+    padding: 1px 7px 1px 6px;
+}
