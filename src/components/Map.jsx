@@ -9,11 +9,14 @@ function Map(props) {
   const [cykelData, setCykelData] = useState([]);
   const [cykelInfrastruktur, setCykelInfrastrukturData] = useState([]);
   const map = useRef();
+  const isMountedRef = useRef(null);
 
   useEffect(() => {
     const marRef = map.current.getMap();
+    isMountedRef.current = true;
 
     fetchCykelData().then((json) => {
+      if(isMountedRef.current) {
       setCykelData(json);
 
       marRef.on("load", function () {
@@ -44,7 +47,9 @@ function Map(props) {
             "line-color": ["get", "color"],
           },
         });
-      });
+      })}
+
+      return () => isMountedRef.current = false;
     });
 
     fetchCykelInfrastrukturData().then((json) => {
