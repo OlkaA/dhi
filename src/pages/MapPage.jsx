@@ -20,7 +20,7 @@ function MapPage() {
       </section>
       <section>
         <h1>Graph</h1>
-        {/* <Graph data={selectedPlace} /> */}
+        <Graph data={selectedPlace} />
       </section>
     </div>
   );
