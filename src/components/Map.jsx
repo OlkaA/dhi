@@ -3,18 +3,14 @@ import MapGL, { Marker, Layer, Feature } from "react-map-gl";
 import {fetchCykelData, fetchCykelInfrastrukturData} from '../data';
 const mapboxApiAccessToken = process.env.REACT_APP_MAP_BOX_API_ACCESS_TOKEN;
 
-function Map() {
+function Map(props) {
   const [cykelData, setCykelData] = useState([]);
   const [cykelInfrastruktur, setCykelInfrastrukturData] = useState([]);
-  const [selectedPlace, setSelectedPlace] = useState(null)
+  // const [selectedPlace, setSelectedPlace] = useState(null)
   const map = useRef();
 
   useEffect(() => {
     const marRef = map.current.getMap();
-
-    fetch('https://api.met.no/weatherapi/locationforecast/2.0/complete?altitude=0&lat=55.6761&lon=12.5683')
-      .then(res => res.json())
-      .then(data => console.log('Cop', data))
 
     fetchCykelData().then( json => {
       setCykelData(json);
@@ -56,11 +52,9 @@ function Map() {
     
   }, []);
 
-console.log(selectedPlace)
-
   const [viewport, setViewport] = useState({
-    latitude: 55.6761,
-    longitude: 12.5683,
+    latitude: props.selectedPlace.lat,
+    longitude: props.selectedPlace.lon,
     zoom: 11,
     bearing: 0,
     pitch: 0,
@@ -80,7 +74,11 @@ console.log(selectedPlace)
         <Marker key={item.id} longitude={item.geometry.coordinates[0][0]} latitude={item.geometry.coordinates[0][1]}>
           <button onClick={(e) => {
               e.preventDefault();
-              setSelectedPlace(item)
+              const selectedPlace = {
+                lat: item.geometry.coordinates[0][1],
+                lon: item.geometry.coordinates[0][0],
+              }
+              props.getSelectedPlace(selectedPlace)
             }
           }>I</button>
         </Marker>
