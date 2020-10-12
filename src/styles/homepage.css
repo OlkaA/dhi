@@ -1,6 +1,13 @@
 .homepage {
+    min-height: 650px;
     height: 80vh;
     background: url('../assets/bike.png') no-repeat;
     background-size: contain;
     background-position: bottom;
+}
+
+@media (max-width: 600px) {
+    .homepage {
+        min-height: unset;
+    }
 }

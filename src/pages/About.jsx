@@ -7,6 +7,10 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import FiberManualRecordOutlinedIcon from "@material-ui/icons/FiberManualRecordOutlined";
 
+const linkStyle = {
+  color: "black", textDecoration: 'underline'
+};
+
 function About() {
   return (
     <Grid container justify="center">
@@ -19,7 +23,7 @@ function About() {
             component="a"
             href="https://reactjs.org/docs/getting-started.html"
             target="_blank"
-            style={{ color: "black" }}
+            style={linkStyle}
           >
             <ListItemIcon>
               <FiberManualRecordOutlinedIcon />
@@ -30,7 +34,7 @@ function About() {
             component="a"
             href="https://reactrouter.com/web/guides/quick-start"
             target="_blank"
-            style={{ color: "black" }}
+            style={linkStyle}
           >
             <ListItemIcon>
               <FiberManualRecordOutlinedIcon />
@@ -41,7 +45,7 @@ function About() {
             component="a"
             href="https://visgl.github.io/react-map-gl/"
             target="_blank"
-            style={{ color: "black" }}
+            style={linkStyle}
           >
             <ListItemIcon>
               <FiberManualRecordOutlinedIcon />
@@ -52,7 +56,7 @@ function About() {
             component="a"
             href="https://recharts.org/en-US/"
             target="_blank"
-            style={{ color: "black" }}
+            style={linkStyle}
           >
             <ListItemIcon>
               <FiberManualRecordOutlinedIcon />
@@ -63,7 +67,7 @@ function About() {
             component="a"
             href="https://material-ui.com/"
             target="_blank"
-            style={{ color: "black" }}
+            style={linkStyle}
           >
             <ListItemIcon>
               <FiberManualRecordOutlinedIcon />
