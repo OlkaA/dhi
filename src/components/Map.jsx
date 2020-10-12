@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import MapGL, { Marker, Popup, Feature } from "react-map-gl";
+import MapGL, { Marker, Popup } from "react-map-gl";
 import { fetchCykelData, fetchCykelInfrastrukturData } from "../data";
-import "../styles/map.css";
+import IconButton from "@material-ui/core/IconButton";
+import InfoIcon from '@material-ui/icons/Info';
 
 const mapboxApiAccessToken = process.env.REACT_APP_MAP_BOX_API_ACCESS_TOKEN;
 
@@ -16,40 +17,41 @@ function Map(props) {
     isMountedRef.current = true;
 
     fetchCykelData().then((json) => {
-      if(isMountedRef.current) {
-      setCykelData(json);
+      if (isMountedRef.current) {
+        setCykelData(json);
 
-      marRef.on("load", function () {
-        marRef.addSource("lines", {
-          type: "geojson",
-          data: {
-            type: "FeatureCollection",
-            features: json.map((route) => {
-              return {
-                type: "Feature",
-                properties: {
-                  color: "#F7455D",
-                },
-                geometry: {
-                  type: "LineString",
-                  coordinates: route.geometry.coordinates[0],
-                },
-              };
-            }),
-          },
+        marRef.on("load", function () {
+          marRef.addSource("lines", {
+            type: "geojson",
+            data: {
+              type: "FeatureCollection",
+              features: json.map((route) => {
+                return {
+                  type: "Feature",
+                  properties: {
+                    color: "#F7455D",
+                  },
+                  geometry: {
+                    type: "LineString",
+                    coordinates: route.geometry.coordinates[0],
+                  },
+                };
+              }),
+            },
+          });
+          marRef.addLayer({
+            id: "lines",
+            type: "line",
+            source: "lines",
+            paint: {
+              "line-width": 1,
+              "line-color": ["get", "color"],
+            },
+          });
         });
-        marRef.addLayer({
-          id: "lines",
-          type: "line",
-          source: "lines",
-          paint: {
-            "line-width": 1,
-            "line-color": ["get", "color"],
-          },
-        });
-      })}
+      }
 
-      return () => isMountedRef.current = false;
+      return () => (isMountedRef.current = false);
     });
 
     fetchCykelInfrastrukturData().then((json) => {
@@ -69,8 +71,8 @@ function Map(props) {
     <MapGL
       ref={map}
       {...viewport}
-      width="50vw"
-      height="50vw"
+      width="100%"
+      height="40vh"
       mapStyle="mapbox://styles/olkaa/ckg3hhgiz1oxq1apg7n5zg5no"
       onViewportChange={(nextViewport) => setViewport(nextViewport)}
       mapboxApiAccessToken={mapboxApiAccessToken}
@@ -81,8 +83,8 @@ function Map(props) {
             longitude={item.geometry.coordinates[0][0]}
             latitude={item.geometry.coordinates[0][1]}
           >
-            <button
-              className="marker"
+            <IconButton
+              aria-label="delete"
               onClick={(e) => {
                 e.preventDefault();
                 const selectedPlace = {
@@ -92,8 +94,8 @@ function Map(props) {
                 props.getSelectedPlace(selectedPlace);
               }}
             >
-              <i>i</i>
-            </button>
+              <InfoIcon style={{ backgroundColor: "#357a38", color: "#6fbf73", borderRadius: '15px' }}/>
+            </IconButton>
           </Marker>
           {item.geometry.coordinates[0][0] === props.selectedPlace.lon &&
             item.geometry.coordinates[0][1] === props.selectedPlace.lat && (

@@ -1,0 +1,6 @@
+.homepage {
+    height: 80vh;
+    background: url('../assets/bike.png') no-repeat;
+    background-size: contain;
+    background-position: bottom;
+}

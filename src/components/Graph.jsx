@@ -6,7 +6,7 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
+  Legend, ResponsiveContainer
 } from "recharts";
 
 function Graph(props) {
@@ -38,9 +38,8 @@ function Graph(props) {
   return (
     <>
       {renderedArray.length > 0 && (
+        <ResponsiveContainer width="100%" height="40%">
         <LineChart
-          width={600}
-          height={300}
           data={renderedArray}
           margin={{
             top: 5,
@@ -62,6 +61,7 @@ function Graph(props) {
           />
           <Line type="monotone" dataKey="Wind (m/s)" stroke="#82ca9d" />
         </LineChart>
+        </ResponsiveContainer>
       )}
     </>
   );

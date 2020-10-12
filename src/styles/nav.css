@@ -1,0 +1,31 @@
+.flex {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.menu{
+    list-style: none;
+    align-items: flex-end;
+    margin: 2rem 1rem 2rem 0;
+}
+
+.menu li{
+    margin-left: 10px;
+} 
+
+.menu li a, .menu li a:visited{
+    text-decoration: none;
+    color: green;
+    border: 1px solid green;
+    padding: 0.5rem 1rem;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+    cursor: pointer;
+} 
+ 
+.menu li:hover a {
+    color: #fffcf6;
+    background-color: green;
+    -webkit-box-shadow: inset 6.5em 0 0 0 #436970;
+            box-shadow: inset 6.5em 0 0 0 #436970;
+  }
