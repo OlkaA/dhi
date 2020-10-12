@@ -10,7 +10,8 @@ function Home() {
         <Typography variant="h3" align="center">
           This project was made to showcase bike paths in Copenhagen, the
           problems that exist on these paths with exact location, and the
-          weather for those locations in the near future (probably for roadworkers to fix problems).
+          weather for those locations in the near future (probably for
+          roadworkers to fix problems).
         </Typography>
       </Grid>
     </Grid>

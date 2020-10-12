@@ -2,12 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import MapGL, { Marker, Popup } from "react-map-gl";
 import { fetchCykelData, fetchCykelInfrastrukturData } from "../data";
 import IconButton from "@material-ui/core/IconButton";
-import InfoIcon from '@material-ui/icons/Info';
+import InfoIcon from "@material-ui/icons/Info";
 
 const mapboxApiAccessToken = process.env.REACT_APP_MAP_BOX_API_ACCESS_TOKEN;
 
 function Map(props) {
-  const [cykelData, setCykelData] = useState([]);
   const [cykelInfrastruktur, setCykelInfrastrukturData] = useState([]);
   const map = useRef();
   const isMountedRef = useRef(null);
@@ -18,8 +17,6 @@ function Map(props) {
 
     fetchCykelData().then((json) => {
       if (isMountedRef.current) {
-        setCykelData(json);
-
         marRef.on("load", function () {
           marRef.addSource("lines", {
             type: "geojson",
@@ -94,7 +91,13 @@ function Map(props) {
                 props.getSelectedPlace(selectedPlace);
               }}
             >
-              <InfoIcon style={{ backgroundColor: "#357a38", color: "#6fbf73", borderRadius: '15px' }}/>
+              <InfoIcon
+                style={{
+                  backgroundColor: "#357a38",
+                  color: "#6fbf73",
+                  borderRadius: "15px",
+                }}
+              />
             </IconButton>
           </Marker>
           {item.geometry.coordinates[0][0] === props.selectedPlace.lon &&

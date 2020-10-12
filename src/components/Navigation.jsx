@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import '../styles/nav.css';
+import "../styles/nav.css";
 
 const Navigation = () => {
   return (
-    <nav className='flex'>
-      <ul className='menu flex'>
+    <nav className="flex">
+      <ul className="menu flex">
         <li>
           <Link to="/">Home</Link>
         </li>

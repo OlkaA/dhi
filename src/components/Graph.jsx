@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import {
   LineChart,
   Line,
@@ -6,7 +6,8 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend, ResponsiveContainer
+  Legend,
+  ResponsiveContainer,
 } from "recharts";
 
 function Graph(props) {
@@ -21,7 +22,7 @@ function Graph(props) {
       .then((data) => {
         setGraphData(data);
       });
-  }, [props]);
+  }, [data.lat, data.lon]);
 
   let renderedArray = [];
   if (graphData) {
@@ -39,28 +40,28 @@ function Graph(props) {
     <>
       {renderedArray.length > 0 && (
         <ResponsiveContainer width="100%" height="40%">
-        <LineChart
-          data={renderedArray}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis/>
-          <Tooltip />
-          <Legend />
-          <Line
-            type="monotone"
-            dataKey="Temperature (C)"
-            stroke="#8884d8"
-            activeDot={{ r: 8 }}
-          />
-          <Line type="monotone" dataKey="Wind (m/s)" stroke="#82ca9d" />
-        </LineChart>
+          <LineChart
+            data={renderedArray}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line
+              type="monotone"
+              dataKey="Temperature (C)"
+              stroke="#8884d8"
+              activeDot={{ r: 8 }}
+            />
+            <Line type="monotone" dataKey="Wind (m/s)" stroke="#82ca9d" />
+          </LineChart>
         </ResponsiveContainer>
       )}
     </>
