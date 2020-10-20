@@ -5,6 +5,7 @@ import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
 
 const mapboxApiAccessToken = process.env.REACT_APP_MAP_BOX_API_ACCESS_TOKEN;
+const mapStyle = `mapbox://styles/olkaa/ckg3hhgiz1oxq1apg7n5zg5no?${mapboxApiAccessToken}`;
 
 function Map(props) {
   const [cykelInfrastruktur, setCykelInfrastrukturData] = useState([]);
@@ -70,7 +71,7 @@ function Map(props) {
       {...viewport}
       width="100%"
       height="40vh"
-      mapStyle="mapbox://styles/olkaa/ckg3hhgiz1oxq1apg7n5zg5no"
+      mapStyle={mapStyle}
       onViewportChange={(nextViewport) => setViewport(nextViewport)}
       mapboxApiAccessToken={mapboxApiAccessToken}
     >
