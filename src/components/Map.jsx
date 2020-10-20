@@ -5,7 +5,7 @@ import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
 
 const mapboxApiAccessToken = process.env.REACT_APP_MAP_BOX_API_ACCESS_TOKEN;
-const mapStyle = `mapbox://styles/olkaa/ckg3hhgiz1oxq1apg7n5zg5no?${mapboxApiAccessToken}`;
+const mapStyle = `mapbox://styles/olkaa/ckg3hhgiz1oxq1apg7n5zg5no?access_token=${mapboxApiAccessToken}`;
 
 function Map(props) {
   const [cykelInfrastruktur, setCykelInfrastrukturData] = useState([]);
